@@ -1,0 +1,61 @@
+
+class InputClass {
+    constructor(contactid,firstname,lastname,contact_li_url,job_title,phone_office,phone_direct,job_level,parentdept,sub_dept,
+        function1,c_street,c_city,c_state,c_postalcode,c_country,datascore,email_address,work_location,updated_on,created_on,call_id,dialing_date,
+        campaign_ID,email_fromcall,phone_fromcall,directno_fromcall,time_zone,dgs_disposition,dgs_comments,qa_disposition,call_updated,
+        Final_emailStatus,companyid,company_name,company_li_url,website,sic_code,naic_code,emp_range,rev_range,parent_industry,li_industry,sub_industry
+        ,phone1,a_street,a_city,a_state,a_country){
+
+            this.contactid=contactid
+            this.firstname=firstname
+            this.lastname=lastname
+            this.contact_li_url=contact_li_url
+            this.job_title=job_title
+            this.phone_office=phone_office
+            this.phone_direct=phone_direct
+            this.job_level=job_level
+            this.parentdept=parentdept
+            this.sub_dept=sub_dept
+            this.function=function1
+            this.c_street=c_street
+            this.c_city=c_city 
+            this.c_state=c_state 
+            this.c_postalcode=c_postalcode
+            this.c_country=c_country 
+            this.datascore=datascore
+            this.email_address=email_address
+            this.work_location=work_location 
+            this.updated_on=updated_on 
+             this.created_on=created_on  
+             this.call_id=call_id 
+            this.dialing_date=dialing_date
+             this.campaign_ID=campaign_ID
+             this.email_fromcall=email_fromcall
+             this.phone_fromcall=phone_fromcall
+             this.directno_fromcall=directno_fromcall
+            this.time_zone=time_zone
+            this.dgs_disposition=dgs_disposition
+            this.dgs_comments=dgs_comments
+            this.qa_disposition=qa_disposition
+            this.call_updated=call_updated
+            this.Final_emailStatus=Final_emailStatus
+            this.companyid=companyid
+            this.company_name=company_name
+            this.company_li_url=company_li_url
+            this.website=website
+            this.sic_code=sic_code
+            this.naic_code=naic_code
+            this.emp_range=emp_range
+            this.rev_range=rev_range
+            this.parent_industry=parent_industry
+            this.li_industry=li_industry
+            this.sub_industry=sub_industry
+            this.phone1=phone1
+            this.a_street=a_street
+            this.a_city=a_city
+            this.a_state=a_state
+            this.a_country=a_country
+    }
+}
+
+module.exports=InputClass
