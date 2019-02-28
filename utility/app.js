@@ -18,6 +18,6 @@ app.use(function (req, res, next) {
 app.use('/api',routes);
 
 var server =app.listen(3001,function(){
-    server.setTimeout(600000);
+    server.setTimeout(10800000);
     console.log("server started at 3001");
 })

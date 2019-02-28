@@ -12,9 +12,9 @@ var services ={
             let index= "tst_lax";
 
             let files = await services.getallFilesFromDirectory(path);            
-            
-            await services.createMapping(index);
 
+           await services.deleteIndex(index) ;
+            await services.createMapping(index);
 
             for (const filename of files) { 
                 await services.readFile(path+"/"+filename,index) ;
@@ -56,6 +56,12 @@ var services ={
                             }
                         })
 
+                        if(services.isDate(csvrow[19])){
+                            csvrow[19]= services.formateDate(csvrow[19])
+                        }else{
+                            csvrow[19]= "01-01-1900"
+                        }
+
                         if(!csvrow[22]){
                             csvrow[22]= "01-01-1900"
                         }
@@ -90,20 +96,54 @@ var services ={
                     });
         })
     },
+    isDate : function(date) {
+        return (new Date(date) !== "Invalid Date" && !isNaN(new Date(date)) ) ? true : false;
+    },
+    formateDate:function(date) {
+        if (typeof date == "string")
+            date = new Date(date);
+        var day = (date.getDate() <= 9 ? "0" + date.getDate() : date.getDate());
+        var month = (date.getMonth() + 1 <= 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1));
+        var dateString = day + "-" + month + "-" + date.getFullYear();
+        return dateString;
+    },
+    deleteIndex:function(index){
+        return new Promise(function(resolve,reject){
+            elasticDb.indices.delete({
+                index:index
+            },async function(err,resp,status){
+                resolve(resp);
+            })
+        })
+    },
     createMapping:function(index){
         return new Promise(function(resolve,reject){
             elasticDb.indices.create({
                 "index":index,
                 "body":mapping
-            },function(err,resp,status){
+            },async function(err,resp,status){
+                await services.updateIndexSetting(index);
                 resolve(resp);
+            })
+        })
+    },
+    updateIndexSetting:function(indexName){
+        return new Promise(function(resolve,reject){
+            elasticDb.indices.putSettings({
+                index:indexName,
+                body:{ 
+                    "max_result_window" : 50000000 
+                }
+            },function(err,resp){
+                if (err) return reject(err);
+                resolve();
             })
         })
     },
     bulkQuery: function(index, data){
         return new Promise(function(resolve,reject){
             elasticDb.bulk({
-                requestTimeout:60000000,
+                requestTimeout:600000,
                 index:index,
                 body:data
             },function(err,resp){

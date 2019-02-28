@@ -463,14 +463,8 @@
             }
           },
           "updated_on": {
-            "type": "text",
-            "fields": {
-              "keyword": {
-                "type": "keyword",
-                "normalizer": "lowerasciinormalizer",
-                "ignore_above": 256
-              }
-            }
+            "type":   "date",
+            "format": "dd-MM-yyyy"
           },
           "website": {
             "type": "text",
